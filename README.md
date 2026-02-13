@@ -56,30 +56,6 @@ npm run dev
 
 Buka browser di `http://localhost:5173`
 
----
-
-## 📖 Documentation
-
-### Untuk Student (Learner)
-
-📘 **[HANDBOOK.md](HANDBOOK.md)** - Complete learning guide dengan:
-* Step-by-step tutorial (Step 1-6)
-* Code examples dan solution snippets
-* Detailed explanations untuk setiap concept
-* Best practices dan troubleshooting tips
-* Bonus challenges untuk advanced learning
-
-### Untuk Instructor
-
-📗 **Instructor materials** (private) tersedia di:
-* `INSTRUCTOR_NOTES.md` - Teaching guide
-* `INSTRUCTOR_NOTES_DETAILED.md` - Detailed lesson plans
-* `THEORY.md` - Comprehensive React Hooks theory
-
-*Note: Instructor files hidden in repository via .gitignore*
-
----
-
 ## 🏗️ Project Structure
 
 ```
@@ -114,7 +90,7 @@ Project ini menggunakan **incremental learning approach** dengan 6 steps:
 
 **Estimated Time:** 2-3 hours untuk complete semua steps
 
-📘 **[Lihat detailed guide di HANDBOOK.md →](HANDBOOK.md)**
+📘 **[Lihat detailed guide di handbook →](https://personal-space-4.gitbook.io/google-developer-group-on-campus)**
 
 ---
 
