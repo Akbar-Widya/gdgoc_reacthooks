@@ -1,50 +1,81 @@
+import { useState, useEffect } from "react";
 import ChatShell from "./ChatShell";
 
 // Mock data - starting point
 const mockMessages = [
   { id: "m1", role: "model", content: "Halo! Aku chatbot 🙂" },
   { id: "m2", role: "user", content: "Nanti kita fokus ke hooks ya?" },
-  { id: "m3", role: "model", content: "Yes. Mulai dari useState sampai custom hook." },
+  {
+    id: "m3",
+    role: "model",
+    content: "Yes. Mulai dari useState sampai custom hook.",
+  },
 ];
 
 export default function Chat() {
-  // ===========================================================================
-  // STEP 1: State Management dengan useState
-  // ===========================================================================
+  const [messages, setMessages] = useState(mockMessages);
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState(null);
 
-  // TODO: Tambahkan useState untuk messages
-
-  // TODO: Tambahkan useState untuk status
-
-  // TODO: Tambahkan useState untuk error
-
-  const status = "idle";
-  const error = null;
-
-  // ===========================================================================
-  // STEP 2: Event Handlers - State Updates & Async Flow
-  // ===========================================================================
+  useEffect(() => {
+    console.log("useEffect triggered");
+    console.log("message length :", messages.length);
+  }, [messages.length]);
 
   function handleSend(text) {
     // TODO: Implementasi logic untuk mengirim message
-    console.log("SEND:", text);
+    if (!text.trim()) {
+      console.log(" empty text, ignore ");
+      return;
+    }
+
+    if (text.toLowerCase().includes("error")) {
+      setStatus("error");
+      setError('Simulasi error: kata "error" terdeteksi!');
+      return;
+    }
+
+    console.log("text valid");
+
+    const userMessage = {
+      id: `m${Date.now()}`,
+      role: "user",
+      content: text,
+    };
+
+    setMessages((prev) => {
+      console.log("previous message :", prev.length);
+      const newMessages = [...prev, userMessage];
+      console.log("New messages :", newMessages);
+      return newMessages;
+    });
+
+    setTimeout(() => {
+      const botMessage = {
+        id: `m${Date.now()}`,
+        role: "model",
+        content: `Kamu bilang: "${text}". Ini response otomatis dari chatbot.`,
+      };
+
+      console.log("bot message :", botMessage);
+
+      setMessages((prev) => {
+        console.log("adding bot message, previous :", prev.length);
+        return [...prev, botMessage];
+      });
+
+      setStatus("idle");
+      console.log("status is reset to :", status);
+    }, 2000);
   }
 
   function handleClear() {
     // TODO: Implementasi logic untuk clear messages
+    setMessages([]);
+    setStatus("idle");
+    setError(null);
     console.log("CLEAR");
   }
-
-  // ===========================================================================
-  // STEP 3: Error Handling
-  // ===========================================================================
-  // TODO: Implementasi error handling di dalam handleSend
-
-  // ===========================================================================
-  // STEP 4: useEffect - Side Effects
-  // ===========================================================================
-  // TODO: Tambahkan useEffect untuk auto-scroll
-
   // ===========================================================================
   // STEP 5: useRef - DOM References
   // ===========================================================================
@@ -57,7 +88,7 @@ export default function Chat() {
 
   return (
     <ChatShell
-      messages={mockMessages}
+      messages={messages}
       status={status}
       error={error}
       onSend={handleSend}
